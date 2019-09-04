@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\House;
 use App\Repository\HouseRepository;
+use App\Form\HouseType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class MainController extends AbstractController
 {
@@ -19,6 +22,29 @@ class MainController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/house/add", name="house_add")
+     */
+    public function add(Request $request)
+    {
+        $house = new House();
+        $form = $this->createForm(HouseType::class, $house);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $house->setCreatedAt(new \DateTime());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($house);
+            $em->flush();
+
+            return $this->redirectToRoute('index');
+        }
+
+        return $this->render('houses/new.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 
 
 }

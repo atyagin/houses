@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HouseController симфония!{% endblock %}
+
+{% block body %}
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row  justify-content-center align-items-center">
+                {{ form_start(form, { 'attr': {
+                    'class' : 'form form-signin bg-secondary' }}) }}
+
+                {{ form_widget(form.name, { 'attr': {
+                    'class' : 'form-control mb-2',
+                    'placeholder' : "House name"}}) }}
+                {{ form_widget(form.address, { 'attr': {
+                    'class' : 'form-control mb-2',
+                    'placeholder' : "House address"}}) }}
+                {{ form_widget(form.floors, { 'attr': {
+                    'class' : 'form-control mb-2',
+                    'placeholder' : "Floors number"}}) }}
+                {{ form_widget(form.deadline, { 'attr': {
+                    'class' : 'form-control mb-2',
+                    'placeholder' : "Dead Line"}}) }}
+
+                <div class="row">
+                    <div class="col">
+                        <a href="{{ path('index') }}" class="btn btn-lg btn-primary btn-block">Go back</a>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
+                    </div>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
