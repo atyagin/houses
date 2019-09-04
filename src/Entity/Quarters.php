@@ -1,0 +1,126 @@
+<?php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\QuartersRepository")
+ */
+class Quarters
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $number;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $floor;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rooms;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $square;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $price;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\House", inversedBy="quarters")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $house;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNumber(): ?int
+    {
+        return $this->number;
+    }
+
+    public function setNumber(int $number): self
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    public function getFloor(): ?int
+    {
+        return $this->floor;
+    }
+
+    public function setFloor(int $floor): self
+    {
+        $this->floor = $floor;
+
+        return $this;
+    }
+
+    public function getRooms(): ?int
+    {
+        return $this->rooms;
+    }
+
+    public function setRooms(int $rooms): self
+    {
+        $this->rooms = $rooms;
+
+        return $this;
+    }
+
+    public function getSquare(): ?int
+    {
+        return $this->square;
+    }
+
+    public function setSquare(int $square): self
+    {
+        $this->square = $square;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getHouse(): ?House
+    {
+        return $this->house;
+    }
+
+    public function setHouse(?House $house): self
+    {
+        $this->house = $house;
+
+        return $this;
+    }
+}
