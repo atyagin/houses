@@ -46,5 +46,28 @@ class MainController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/house/{id}/edit", name="house_edit")
+     */
+    public function edit(House $house, Request $request)
+    {
+        $form = $this->createForm(HouseType::class, $house);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('house_show', [
+                'id' => $house->getId()
+            ]);
+        }
+
+        return $this->render('houses/new.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+
 
 }
