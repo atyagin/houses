@@ -10,18 +10,24 @@
                 {{ form_start(form, { 'attr': {
                     'class' : 'form form-signin bg-secondary' }}) }}
 
-                {{ form_widget(form.name, { 'attr': {
+                {{ form_widget(form.number, { 'attr': {
                     'class' : 'form-control mb-2',
-                    'placeholder' : "House name"}}) }}
-                {{ form_widget(form.address, { 'attr': {
+                    'placeholder' : "Quarters number"}}) }}
+                {{ form_widget(form.floor, { 'attr': {
                     'class' : 'form-control mb-2',
-                    'placeholder' : "House address"}}) }}
-                {{ form_widget(form.floors, { 'attr': {
+                    'placeholder' : "Quarters floor"}}) }}
+                {{ form_widget(form.rooms, { 'attr': {
                     'class' : 'form-control mb-2',
-                    'placeholder' : "Floors number"}}) }}
-                {{ form_widget(form.deadline, { 'attr': {
+                    'placeholder' : "Quarters rooms"}}) }}
+                {{ form_widget(form.square, { 'attr': {
                     'class' : 'form-control mb-2',
-                    'placeholder' : "Dead Line"}}) }}
+                    'placeholder' : "Quarters square"}}) }}
+                {{ form_widget(form.price, { 'attr': {
+                    'class' : 'form-control mb-2',
+                    'placeholder' : "Quarters price"}}) }}
+                {{ form_widget(form.Type, { 'attr': {
+                    'class' : 'form-control mb-2',
+                }}) }}
 
                 <div class="row">
                     <div class="col">

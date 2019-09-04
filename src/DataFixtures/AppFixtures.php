@@ -29,17 +29,17 @@ class AppFixtures extends Fixture
     {
 
         $flatType = new QuartersType();
-        $flatType->setName('Квартира');
+        $flatType->setName('Flat');
         $manager->persist($flatType);
         $this->addReference('flatType', $flatType);
 
         $officeType = new QuartersType();
-        $officeType->setName('Офис');
+        $officeType->setName('Office');
         $manager->persist($officeType);
         $this->addReference('officeType', $officeType);
 
         $parkingType = new QuartersType();
-        $parkingType->setName('Парковка');
+        $parkingType->setName('Parking');
         $manager->persist($parkingType);
         $this->addReference('parkingType', $parkingType);
 

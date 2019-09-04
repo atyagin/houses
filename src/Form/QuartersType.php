@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Quarters;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,8 +18,10 @@ class QuartersType extends AbstractType
             ->add('rooms')
             ->add('square')
             ->add('price')
-            ->add('house')
-            ->add('Type')
+            ->add('Type', EntityType::class, [
+                'class' => \App\Entity\QuartersType::class,
+                'label' => 'type'
+            ])
         ;
     }
 

@@ -6,10 +6,15 @@
 
     <div class="album py-5 bg-light">
         <div class="container">
-            <div class="row">
 
+            <div class="row mb-5 p-3 ">
                 <h2>House: {{ house.name }}</h2>
+                <div class="col-md-4">
+                    <a class="btn btn-outline-secondary" href="{{ path('house_add_quarters', {'id': house.id}) }}">Add quarters</a>
+                </div>
+            </div>
 
+            <div class="row">
                 <table class="table table-hover table-dark">
                     <thead>
                         <tr>
@@ -19,6 +24,7 @@
                             <th scope="col">Rooms</th>
                             <th scope="col">Square</th>
                             <th scope="col">Cost</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +36,12 @@
                                 <td>{{ quarter.rooms }}</td>
                                 <td>{{ quarter.square }}</td>
                                 <td>{{ quarter.price }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="{{ path('quarters_edit', {'id': quarter.id}) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                        <a href="{{ path('quarters_delete', {'id': quarter.id}) }}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                    </div>
+                                </td>
                             </tr>
                         {% else %}
                             <tr>
@@ -39,6 +51,13 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="row">
+                <div class="col-lg-2">
+                    <a href="{{ path('index') }}" class="btn btn-lg btn-primary btn-block">Go back</a>
+                </div>
+            </div>
+
         </div>
     </div>
 

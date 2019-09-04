@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\House;
+use App\Entity\Quarters;
+use App\Form\QuartersType;
 use App\Repository\HouseRepository;
 use App\Form\HouseType;
 use App\Repository\QuartersRepository;
@@ -43,7 +45,8 @@ class MainController extends AbstractController
         }
 
         return $this->render('houses/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'button' => 'Add'
         ]);
     }
 
@@ -65,7 +68,8 @@ class MainController extends AbstractController
         }
 
         return $this->render('houses/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'button' => 'Update'
         ]);
     }
 
@@ -82,11 +86,40 @@ class MainController extends AbstractController
     }
 
     /**
+     * @Route("/house/{id}/add_quarters", name="house_add_quarters")
+     */
+    public function addQuarters(House $house, Request $request)
+    {
+        $quarters = new Quarters();
+        $form = $this->createForm(QuartersType::class, $quarters);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $quarters->setCreatedAt(new \DateTime());
+            $quarters->setHouse($house);
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($quarters);
+            $em->flush();
+
+            return $this->redirectToRoute('index');
+        }
+
+        return $this->render('quarters/new.html.twig', [
+            'form' => $form->createView(),
+            'house' => $house,
+            'button' => 'Add'
+        ]);
+    }
+
+    /**
      * @Route("/house/{id}", name="house_show")
      */
     public function house(House $house, QuartersRepository $quartersRepository)
     {
-        $quarters = $quartersRepository->findBy(['house' => $house]);
+        $quarters = $house->getQuarters();
+
         return $this->render('houses/show.html.twig', [
             'house' => $house,
             'quarters' => $quarters
