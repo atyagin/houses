@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\House;
 use App\Repository\HouseRepository;
 use App\Form\HouseType;
+use App\Repository\QuartersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -83,10 +84,12 @@ class MainController extends AbstractController
     /**
      * @Route("/house/{id}", name="house_show")
      */
-    public function house(House $house)
+    public function house(House $house, QuartersRepository $quartersRepository)
     {
+        $quarters = $quartersRepository->findBy(['house' => $house]);
         return $this->render('houses/show.html.twig', [
-            'house' => $house
+            'house' => $house,
+            'quarters' => $quarters
         ]);
     }
 

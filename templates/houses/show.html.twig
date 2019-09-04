@@ -9,58 +9,33 @@
             <div class="row">
 
                 <h2>House: {{ house.name }}</h2>
+
                 <table class="table table-hover table-dark">
                     <thead>
-                    <tr>
-                        <th scope="col">№</th>
-                        <th scope="col">Floor</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Rooms</th>
-                        <th scope="col">Square</th>
-                        <th scope="col">Cost</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">№</th>
+                            <th scope="col">Floor</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Rooms</th>
+                            <th scope="col">Square</th>
+                            <th scope="col">Cost</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">25</th>
-                        <td>4</td>
-                        <td>office</td>
-                        <td>2</td>
-                        <td>120</td>
-                        <td>4000000</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">25</th>
-                        <td>4</td>
-                        <td>office</td>
-                        <td>2</td>
-                        <td>120</td>
-                        <td>4000000</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">25</th>
-                        <td>4</td>
-                        <td>office</td>
-                        <td>2</td>
-                        <td>120</td>
-                        <td>4000000</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">25</th>
-                        <td>4</td>
-                        <td>office</td>
-                        <td>2</td>
-                        <td>120</td>
-                        <td>4000000</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">25</th>
-                        <td>4</td>
-                        <td>office</td>
-                        <td>2</td>
-                        <td>120</td>
-                        <td>4000000</td>
-                    </tr>
+                        {% for quarter in quarters %}
+                            <tr>
+                                <th scope="row">{{ quarter.number }}</th>
+                                <td>{{ quarter.floor }}</td>
+                                <td>{{ quarter.type.name }}</td>
+                                <td>{{ quarter.rooms }}</td>
+                                <td>{{ quarter.square }}</td>
+                                <td>{{ quarter.price }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>no quarters</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
