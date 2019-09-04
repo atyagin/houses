@@ -68,6 +68,16 @@ class MainController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/house/{id}/delete", name="house_delete")
+     */
+    public function delete(House $house)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($house);
+        $em->flush();
 
+        return $this->redirectToRoute('index');
+    }
 
 }
