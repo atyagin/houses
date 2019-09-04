@@ -80,4 +80,14 @@ class MainController extends AbstractController
         return $this->redirectToRoute('index');
     }
 
+    /**
+     * @Route("/house/{id}", name="house_show")
+     */
+    public function house(House $house)
+    {
+        return $this->render('houses/show.html.twig', [
+            'house' => $house
+        ]);
+    }
+
 }
