@@ -1,20 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Hello HouseController симфония!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5 p-3 ">
+                <div class="col-md-4">
+                    <a class="btn btn-outline-secondary" href="{#{{ path('house_add') }}#}">Add object</a>
+                </div>
+            </div>
+            <div class="row">
+                {#
+                {% for house in houses %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>Name: <span class="text-danger"><small>{{ house.name }}</small></span></li>
+                                    <li>Address: <span class="text-danger"><small>{{ house.address }}</small></span></li>
+                                    <li>Floors: <span class="text-danger"><small>{{ house.floor }}</small></span></li>
+                                    <li>Dead line: <span class="text-danger"><small>{{ house.deadline|date("d.m.Y") }}</small></span></li>
+                                </ul>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
-    </ul>
-</div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="{{ path('house_show', {'id': house.id}) }}" class="btn btn-sm btn-outline-secondary">View</a>
+                                        <a href="{{ path('house_edit', {'id': house.id}) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                        <a href="{{ path('house_delete', {'id': house.id}) }}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                    </div>
+                                    <small class="text-muted">{{ house.createdat|date("d.m.Y H:i") }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+
+                    <h2>no records found</h2>
+
+                {% endfor %}
+                #}
+                <h2>no records found</h2>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
