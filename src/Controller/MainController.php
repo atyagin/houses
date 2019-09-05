@@ -20,7 +20,7 @@ class MainController extends AbstractController
     public function index(HouseRepository $houseRepository)
     {
         $houses = $houseRepository->findAll();
-        return $this->render('main/login.html.twig', [
+        return $this->render('main/index.html.twig', [
             'houses' => $houses
         ]);
     }

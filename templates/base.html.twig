@@ -16,10 +16,12 @@
                 <img src="/assets/img/robo.svg" width="40" height="40" alt="robot">
                 <strong>Symfony</strong>
             </a>
+            {% block logout %}
+                <a href="/logout" class="navbar-toggler collapsed">
+                    <span>LogOut</span>
+                </a>
+            {% endblock %}
 
-            <a href="/logout" class="navbar-toggler collapsed">
-                <span>LogOut</span>
-            </a>
 
         </div>
     </div>
