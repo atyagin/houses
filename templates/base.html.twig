@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}symfony!{% endblock %}</title>
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/css/i.css" rel="stylesheet">
+    <link href="{{ asset('build/css/app.css') }}" rel="stylesheet">
     {% block stylesheets %}{% endblock %}
 </head>
 <body class="h-100">
@@ -34,7 +33,7 @@
         <p>© ilyaCorp 2019</p>
     </div>
 </footer>
-<script src="/assets/js/bootstrap.js"></script>
+<script src="{{ asset('build/js/app.js') }}"></script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>
