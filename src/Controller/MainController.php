@@ -125,10 +125,20 @@ class MainController extends AbstractController
     /**
      * @Route("/house/{id}", name="house_show")
      */
-    public function house(House $house, QuartersRepository $quartersRepository)
+    public function house(Request $request, House $house, PaginatorInterface $paginator, QuartersRepository $quartersRepository)
     {
-        $quarters = $house->getQuarters();
 
+        $id = $house->getId();
+        $allAppointmentsQuery = $quartersRepository->createQueryBuilder('q')
+            ->andWhere("q.house = $id")
+            ->getQuery();
+        $quarters = $paginator->paginate(
+            $allAppointmentsQuery,
+            $request->query->getInt('page', 1),
+            3
+        );
+
+        //$quarters = $house->getQuarters();
         return $this->render('houses/show.html.twig', [
             'house' => $house,
             'quarters' => $quarters
