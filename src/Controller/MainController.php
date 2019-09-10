@@ -129,8 +129,8 @@ class MainController extends AbstractController
     {
 
         $id = $house->getId();
-        $allAppointmentsQuery = $quartersRepository->createQueryBuilder('q')
-            ->andWhere("q.house = $id")
+        $allAppointmentsQuery = $quartersRepository->createQueryBuilder('quarter')
+            ->andWhere("quarter.house = $id")
             ->getQuery();
         $quarters = $paginator->paginate(
             $allAppointmentsQuery,

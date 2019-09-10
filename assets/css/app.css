@@ -25,7 +25,12 @@ body {
         font-size: 3.5rem;
     }
 }
-
+.asc {
+    color: green !important;
+}
+.desc {
+    color: red !important;
+}
 .form-signin {
 
     width: 100%;
