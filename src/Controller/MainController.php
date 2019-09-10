@@ -11,15 +11,24 @@ use App\Repository\QuartersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
+use Knp\Component\Pager\Paginator;
 
 class MainController extends AbstractController
 {
     /**
      * @Route("/", name="index")
      */
-    public function index(HouseRepository $houseRepository)
+    public function index(Request $request, PaginatorInterface $paginator, HouseRepository $houseRepository)
     {
-        $houses = $houseRepository->findAll();
+        $allAppointmentsQuery = $houseRepository->createQueryBuilder('p')
+            ->getQuery();
+        $houses = $paginator->paginate(
+            $allAppointmentsQuery,
+            $request->query->getInt('page', 1),
+            6
+        );
+        //$houses = $houseRepository->findAll();
         return $this->render('main/index.html.twig', [
             'houses' => $houses
         ]);
