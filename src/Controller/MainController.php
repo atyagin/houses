@@ -141,7 +141,7 @@ class MainController extends AbstractController
         //$quarters = $house->getQuarters();
         return $this->render('houses/show.html.twig', [
             'house' => $house,
-            'quarters' => $quarters
+            'quarters' => $quarters,
         ]);
     }
 
