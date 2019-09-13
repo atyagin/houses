@@ -7,6 +7,12 @@
     <div class="album py-5 bg-light">
         <div class="container">
 
+            {% for message in app.flashes('info') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
             <div class="row mb-5 p-3 ">
                 <h2>House: {{ house.name }}</h2>
                 <div class="col-md-4">

@@ -50,6 +50,11 @@ class MainController extends AbstractController
             $em->persist($house);
             $em->flush();
 
+            $this->addFlash(
+                'info',
+                'House added successfully!'
+            );
+
             return $this->redirectToRoute('index');
         }
 
@@ -71,6 +76,11 @@ class MainController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash(
+                'info',
+                'House edited successfully!'
+            );
+
             return $this->redirectToRoute('house_show', [
                 'id' => $house->getId()
             ]);
@@ -91,6 +101,11 @@ class MainController extends AbstractController
         $em->remove($house);
         $em->flush();
 
+        $this->addFlash(
+            'info',
+            'House deleted successfully!'
+        );
+
         return $this->redirectToRoute('index');
     }
 
@@ -107,12 +122,18 @@ class MainController extends AbstractController
             $quarters->setCreatedAt(new \DateTime());
             $quarters->setHouse($house);
 
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($quarters);
             $em->flush();
 
-            return $this->redirectToRoute('index');
+            $this->addFlash(
+                'info',
+                'Quarters added successfully!'
+            );
+
+            return $this->redirectToRoute('house_show', [
+                'id' => $house->getId()
+            ]);
         }
 
         return $this->render('quarters/new.html.twig', [

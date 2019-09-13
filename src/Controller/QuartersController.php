@@ -22,9 +22,14 @@ class QuartersController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('index', /*[
-                //'id' => $house->getId()
-            ]*/);
+            $this->addFlash(
+                'info',
+                'Quarters added successfully!'
+            );
+
+            return $this->redirectToRoute('house_show', [
+                'id' => $quarters->getHouse()->getId()
+            ]);
         }
 
         return $this->render('quarters/new.html.twig', [
@@ -37,13 +42,18 @@ class QuartersController extends AbstractController
     /**
      * @Route("/quarters/{id}/delete", name="quarters_delete")
      */
-    public function delete(Quarters $quarters)
+    public function delete(Request $request, Quarters $quarters)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($quarters);
         $em->flush();
 
-        return $this->redirectToRoute('index');
+        $this->addFlash(
+            'info',
+            'Quarters deleted successfully!'
+        );
+
+        return $this->redirect($request->headers->get('referer'));
     }
 }
 
