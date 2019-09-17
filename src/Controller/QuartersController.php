@@ -11,6 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class QuartersController extends AbstractController
 {
     /**
+     * @param Quarters $quarters
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @Route("/quarters/{id}/edit", name="quarters_edit")
      */
     public function edit(Quarters $quarters, Request $request)
@@ -40,6 +43,9 @@ class QuartersController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param Quarters $quarters
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/quarters/{id}/delete", name="quarters_delete")
      */
     public function delete(Request $request, Quarters $quarters)

@@ -17,6 +17,10 @@ use Knp\Component\Pager\Paginator;
 class MainController extends AbstractController
 {
     /**
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param HouseRepository $houseRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/", name="index")
      */
     public function index(Request $request, PaginatorInterface $paginator, HouseRepository $houseRepository)
@@ -35,6 +39,9 @@ class MainController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      * @Route("/house/add", name="house_add")
      */
     public function add(Request $request)
@@ -63,6 +70,9 @@ class MainController extends AbstractController
     }
 
     /**
+     * @param House $house
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @Route("/house/{id}/edit", name="house_edit")
      */
     public function edit(House $house, Request $request)
@@ -91,6 +101,8 @@ class MainController extends AbstractController
     }
 
     /**
+     * @param House $house
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/house/{id}/delete", name="house_delete")
      */
     public function delete(House $house)
@@ -108,6 +120,10 @@ class MainController extends AbstractController
     }
 
     /**
+     * @param House $house
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      * @Route("/house/{id}/add_quarters", name="house_add_quarters")
      */
     public function addQuarters(House $house, Request $request)
@@ -142,7 +158,12 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/house/{id}", name="house_show")
+     * @param Request $request
+     * @param House $house
+     * @param PaginatorInterface $paginator
+     * @param QuartersRepository $quartersRepository
+     * @return \Symfony\Component\HttpFoundation\Response
+     *  @Route("/house/{id}", name="house_show")
      */
     public function house(Request $request, House $house, PaginatorInterface $paginator, QuartersRepository $quartersRepository)
     {
