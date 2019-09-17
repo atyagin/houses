@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuartersRepository")
@@ -18,11 +19,14 @@ class Quarters
 
     /**
      * @ORM\Column(type="integer", options={"unsigned"=true})
+     * @Assert\NotBlank(message="Provide house number.")
+     * @Assert\Positive(message="House number must be positive.")
      */
     private $number;
 
     /**
      * @ORM\Column(type="integer")
+     * Assert\NotBlank(message="Provide floor number.")
      */
     private $floor;
 
@@ -33,11 +37,15 @@ class Quarters
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Provide house square.")
+     * @Assert\Positive(message="House square must be positive.")
      */
     private $square;
 
     /**
      * @ORM\Column(type="integer", options={"unsigned"=true})
+     * @Assert\NotBlank(message="Provide house price.")
+     * @Assert\Positive(message="House price must be positive.")
      */
     private $price;
 
