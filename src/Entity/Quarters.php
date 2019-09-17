@@ -17,7 +17,7 @@ class Quarters
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"unsigned"=true})
      */
     private $number;
 
@@ -27,17 +27,17 @@ class Quarters
     private $floor;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"unsigned"=true})
      */
     private $rooms;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $square;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"unsigned"=true})
      */
     private $price;
 
@@ -99,12 +99,12 @@ class Quarters
         return $this;
     }
 
-    public function getSquare(): ?int
+    public function getSquare(): ?float
     {
         return $this->square;
     }
 
-    public function setSquare(int $square): self
+    public function setSquare(float $square): self
     {
         $this->square = $square;
 

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\HouseRepository")
@@ -20,21 +21,27 @@ class House
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Provide house name.")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Provide house address.")
      */
     private $address;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"unsigned"=true})
+     * @Assert\NotBlank(message="Provide house floors number.")
+     * @Assert\Positive(message="Floors number must be positive.")
      */
     private $floors;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
      */
     private $deadline;
 
@@ -148,4 +155,5 @@ class House
 
         return $this;
     }
+
 }

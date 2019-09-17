@@ -4,9 +4,12 @@ namespace App\Form;
 
 use App\Entity\Quarters;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\DataTransformer\IntegerToLocalizedStringTransformer;
 
 class QuartersType extends AbstractType
 {
@@ -16,7 +19,9 @@ class QuartersType extends AbstractType
             ->add('number')
             ->add('floor')
             ->add('rooms')
-            ->add('square')
+            ->add('square', NumberType::class, [
+                'scale' => 2
+            ])
             ->add('price')
             ->add('Type', EntityType::class, [
                 'class' => \App\Entity\QuartersType::class,

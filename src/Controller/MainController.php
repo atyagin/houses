@@ -28,7 +28,7 @@ class MainController extends AbstractController
             $request->query->getInt('page', 1),
             6
         );
-        //$houses = $houseRepository->findAll();
+
         return $this->render('main/index.html.twig', [
             'houses' => $houses
         ]);
@@ -42,7 +42,6 @@ class MainController extends AbstractController
         $house = new House();
         $form = $this->createForm(HouseType::class, $house);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $house->setCreatedAt(new \DateTime());
 
@@ -54,13 +53,12 @@ class MainController extends AbstractController
                 'info',
                 'House added successfully!'
             );
-
             return $this->redirectToRoute('index');
         }
 
         return $this->render('houses/new.html.twig', [
             'form' => $form->createView(),
-            'button' => 'Add'
+            'button' => 'Add',
         ]);
     }
 
@@ -159,7 +157,6 @@ class MainController extends AbstractController
             3
         );
 
-        //$quarters = $house->getQuarters();
         return $this->render('houses/show.html.twig', [
             'house' => $house,
             'quarters' => $quarters,
