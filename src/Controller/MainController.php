@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\House;
 use App\Entity\Quarters;
+use App\Event\AfterHouseAddEvent;
 use App\Form\QuartersType;
 use App\Repository\HouseRepository;
 use App\Form\HouseType;
@@ -13,6 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
 use Knp\Component\Pager\Paginator;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Psr\Log\LoggerInterface;
 
 class MainController extends AbstractController
 {
@@ -23,7 +26,7 @@ class MainController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/", name="index")
      */
-    public function index(Request $request, PaginatorInterface $paginator, HouseRepository $houseRepository)
+    public function index(Request $request, PaginatorInterface $paginator, HouseRepository $houseRepository, LoggerInterface $logger)
     {
         $allAppointmentsQuery = $houseRepository->createQueryBuilder('p')
             ->getQuery();
@@ -44,7 +47,7 @@ class MainController extends AbstractController
      * @throws \Exception
      * @Route("/house/add", name="house_add")
      */
-    public function add(Request $request)
+    public function add(Request $request, EventDispatcherInterface $eventDispatcher)
     {
         $house = new House();
         $form = $this->createForm(HouseType::class, $house);
@@ -60,6 +63,10 @@ class MainController extends AbstractController
                 'info',
                 'House added successfully!'
             );
+
+            $afterHouseAddEvent = new AfterHouseAddEvent($house);
+            $eventDispatcher->dispatch(AfterHouseAddEvent::NAME, $afterHouseAddEvent);
+
             return $this->redirectToRoute('index');
         }
 
@@ -163,11 +170,10 @@ class MainController extends AbstractController
      * @param PaginatorInterface $paginator
      * @param QuartersRepository $quartersRepository
      * @return \Symfony\Component\HttpFoundation\Response
-     *  @Route("/house/{id}", name="house_show")
+     * @Route("/house/{id}", name="house_show")
      */
     public function house(Request $request, House $house, PaginatorInterface $paginator, QuartersRepository $quartersRepository)
     {
-
         $id = $house->getId();
         $allAppointmentsQuery = $quartersRepository->createQueryBuilder('quarter')
             ->andWhere("quarter.house = $id")

@@ -27,7 +27,6 @@ class AppFixtures extends Fixture
 
     public function loadQuartersTypes(ObjectManager $manager)
     {
-
         $flatType = new QuartersType();
         $flatType->setName('Flat');
         $manager->persist($flatType);
